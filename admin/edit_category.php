@@ -4,7 +4,7 @@ include_once '../config/db.php'; // Include database connection
 
 // Check if user is logged in and has admin privileges
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: login.php"); // Redirect to login if not logged in or not an admin
+    header("Location: ../login.php"); 
     exit();
 }
 
@@ -26,7 +26,7 @@ if (isset($_GET['id'])) {
         echo "Category not found.";
         exit();
     }
-    
+
     // Handle form submission
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $category_name = $_POST['category_name'];
@@ -61,24 +61,30 @@ if (isset($_GET['id'])) {
 
 <body>
 
-    <div class="container mt-5">
-        <h1 class="mb-4">Edit Category</h1>
+    <div class="d-flex">
+        <!-- Include the Sidebar -->
+        <?php include '../components/sidebar.php'; ?>
 
-        <!-- Display error if any -->
-        <?php if (isset($error)): ?>
-            <div class="alert alert-danger"><?= $error ?></div>
-        <?php endif; ?>
+        <!-- Main Content -->
+        <div class="container-fluid">
+            <h1 class="mb-4">Edit Category</h1>
 
-        <!-- Edit Category Form -->
-        <form action="edit_category.php?id=<?= $category['id'] ?>" method="POST">
-            <div class="mb-3">
-                <label for="category_name" class="form-label">Category Name</label>
-                <input type="text" class="form-control" id="category_name" name="category_name" value="<?= $category['name'] ?>" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Update Category</button>
-        </form>
+            <!-- Display error if any -->
+            <?php if (isset($error)): ?>
+                <div class="alert alert-danger"><?= $error ?></div>
+            <?php endif; ?>
 
-        <a href="categories.php" class="btn btn-secondary mt-3">Back to Categories</a>
+            <!-- Edit Category Form -->
+            <form action="edit_category.php?id=<?= $category['id'] ?>" method="POST">
+                <div class="mb-3">
+                    <label for="category_name" class="form-label">Category Name</label>
+                    <input type="text" class="form-control" id="category_name" name="category_name" value="<?= $category['name'] ?>" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Category</button>
+            </form>
+
+            <a href="categories.php" class="btn btn-secondary mt-3">Back to Categories</a>
+        </div>
     </div>
 
     <!-- Add Bootstrap JS (optional) -->

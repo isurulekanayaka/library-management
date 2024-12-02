@@ -1,0 +1,18 @@
+body {
+    background-color: #f7f7f7;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: auto;
+}
+
+.card {
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.error {
+    color: #e74c3c;
+    font-weight: bold;
+}

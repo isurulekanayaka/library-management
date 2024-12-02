@@ -54,28 +54,39 @@ if (isset($_POST['login'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Library Management System</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css"> <!-- Custom CSS for styling -->
 </head>
-<body>
-    <div class="login-container">
-        <h2>Login to Library Management System</h2>
+<body class="bg-light">
 
-        <!-- Display error message if any -->
-        <?php if (isset($error)) { echo "<p class='error'>$error</p>"; } ?>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card shadow-sm p-4" style="max-width: 400px; width: 100%; border-radius: 10px;">
+            <h3 class="text-center mb-4">Login to Library Management System</h3>
 
-        <form action="login.php" method="POST">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" name="login">Login</button>
-        </form>
+            <!-- Display error message if any -->
+            <?php if (isset($error)) { echo "<div class='alert alert-danger'>$error</div>"; } ?>
 
-        <p>Don't have an account? <a href="register.php">Register here</a></p>
+            <form action="login.php" method="POST">
+                <div class="form-group mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+
+                <button type="submit" name="login" class="btn btn-primary w-100">Login</button>
+            </form>
+
+            <p class="mt-3 text-center">Don't have an account? <a href="register.php">Register here</a></p>
+        </div>
     </div>
+
+    <!-- Include Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
