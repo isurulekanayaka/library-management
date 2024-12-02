@@ -8,6 +8,24 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
+// Handle book deletion
+if (isset($_GET['delete_id'])) {
+    $delete_id = $_GET['delete_id'];
+    // Prepare the delete query
+    $delete_query = "DELETE FROM books WHERE id = ?";
+    $stmt = $conn->prepare($delete_query);
+    $stmt->bind_param('i', $delete_id);
+
+    if ($stmt->execute()) {
+        // Redirect after successful deletion
+        header("Location: book.php?message=Book deleted successfully.");
+        exit();
+    } else {
+        // If deletion failed
+        header("Location: book.php?error=Failed to delete book.");
+        exit();
+    }
+}
 // Fetch all categories for the filter dropdown
 $categories_result = $conn->query("SELECT * FROM books_categories");
 $categories = $categories_result->fetch_all(MYSQLI_ASSOC);
